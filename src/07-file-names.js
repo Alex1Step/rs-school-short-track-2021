@@ -13,8 +13,21 @@
  * the output should be ["file", "file(1)", "image", "file(1)(1)", "file(2)"]
  *
  */
-function renameFiles(/* names */) {
-  throw new Error('Not implemented');
+function renameFiles(arr) {
+  const counter = {};
+  for (let i = 0; i < arr.length; i++) {
+    if (!counter[arr[i]]) {
+      counter[arr[i]] = 1;
+      // eslint-disable-next-line no-param-reassign
+      if (arr.indexOf(arr[i]) !== -1 && arr.indexOf(arr[i]) < i) arr[i] = `${arr[i]}(1)`;
+    } else {
+      counter[arr[i]] += 1;
+      // eslint-disable-next-line no-param-reassign
+      arr[i] = `${arr[i]}(${counter[arr[i]] - 1})`;
+    }
+  }
+  return arr;
 }
 
 module.exports = renameFiles;
+// renameFiles(['file', 'file', 'image', 'file(1)', 'file']);
