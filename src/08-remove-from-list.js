@@ -17,8 +17,23 @@
  * }
  */
 
-function removeKFromList(/* l, k */) {
-  throw new Error('Not implemented');
+function removeKFromList(list, k) {
+  let currNode = list;
+  while (currNode) {
+    if (currNode.value === k) {
+      currNode.value = currNode.next.value;
+      currNode.next = currNode.next.next;
+    } else {
+      currNode = currNode.next;
+    }
+  }
+  // while (list) {
+  //   // eslint-disable-next-line no-console
+  //   console.log(list.value, list.next);
+  //   // eslint-disable-next-line no-param-reassign
+  //   list = list.next;
+  // }
+  return list;
 }
 
 module.exports = removeKFromList;
